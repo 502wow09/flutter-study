@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_search/data/pixabay_api.dart';
-import 'package:image_search/model/Photo.dart';
+import 'package:image_search/model/photo.dart';
 
 class PhotoWidget extends StatelessWidget {
   final Photo photo;
