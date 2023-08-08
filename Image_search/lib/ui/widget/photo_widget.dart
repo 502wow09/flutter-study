@@ -19,7 +19,7 @@ class PhotoWidget extends StatelessWidget {
           fit: BoxFit.cover,
           image:
               // NetworkImage('https://pbs.twimg.com/media/EkM1OLsUYAILOQ7.jpg'),
-              NetworkImage(photo.largeImageURL),
+              NetworkImage(photo.largeImageUrl),
         ),
       ),
     );
