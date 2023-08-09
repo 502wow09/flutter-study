@@ -22,8 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<HomeViewModel>();
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -43,30 +41,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 suffixIcon: IconButton(
                   onPressed: () async {
-                    viewModel.fetch(_controller.text);
+                    context.read<HomeViewModel>().fetch(_controller.text);
                   },
                   icon: const Icon(Icons.search),
                 ),
               ),
             ),
           ),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(16.0),
-              shrinkWrap: true,
-              itemCount: viewModel.photos.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemBuilder: (context, index) {
-                final photo = viewModel.photos[index];
-                return PhotoWidget(
-                  photo: photo,
-                );
-              },
-            ),
+          //
+          Consumer<HomeViewModel>(
+            builder: (_, viewModel, child) {
+              return Expanded(
+                child: GridView.builder(
+                  padding: const EdgeInsets.all(16.0),
+                  shrinkWrap: true,
+                  itemCount: viewModel.photos.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                  itemBuilder: (context, index) {
+                    final photo = viewModel.photos[index];
+                    return PhotoWidget(
+                      photo: photo,
+                    );
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),
