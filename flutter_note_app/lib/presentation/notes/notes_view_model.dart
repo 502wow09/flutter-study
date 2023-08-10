@@ -1,7 +1,6 @@
-import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_note_app/domain/repository/note_repository.dart';
+import 'package:flutter_note_app/presentation/notes/notes_state.dart';
 
 import '../../domain/model/note.dart';
 import 'notes_event.dart';
@@ -11,11 +10,11 @@ class NotesViewModel with ChangeNotifier {
 
   NotesViewModel(this.repository);
 
-  List<Note> _notes = [];
-  Note? _recentlyDeletedNote;
+  NotesState _state = NotesState();
 
-  //전에 나왔던 .copy(), .add() 등 다 Exception으로 막은 클래스
-  UnmodifiableListView<Note> get note => UnmodifiableListView(_notes);
+  NotesState get state => _state;
+
+  Note? _recentlyDeletedNote;
 
   void onEvent(NotesEvent event) {
     event.when(
@@ -27,7 +26,9 @@ class NotesViewModel with ChangeNotifier {
 
   Future<void> _loadNotes() async {
     List<Note> notes = await repository.getNotes();
-    _notes = notes;
+    _state = state.copyWith(
+      notes: notes,
+    );
     notifyListeners();
   }
 
