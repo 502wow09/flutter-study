@@ -2,10 +2,10 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../domain/model/note.dart';
 
-class NoteDb {
+class NoteDbHelper {
   Database db;
 
-  NoteDb(this.db);
+  NoteDbHelper(this.db);
 
   Future<Note?> getNoteById(int id) async {
     // whereArgs의 param이 where에 순서대로 매핑됨.

@@ -1,10 +1,10 @@
 import 'package:flutter_note_app/domain/model/note.dart';
 import 'package:flutter_note_app/domain/repository/note_repository.dart';
 
-import '../data_source/note_db.dart';
+import '../data_source/note_db_helper.dart';
 
 class NoteRepositoryImpl implements NoteRepository {
-  final NoteDb db;
+  final NoteDbHelper db;
 
   NoteRepositoryImpl(this.db);
 
